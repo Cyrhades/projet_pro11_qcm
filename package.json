@@ -1,0 +1,20 @@
+{
+  "name": "qcm",
+  "version": "1.0.0",
+  "description": "Projet QCM avec la PRO11",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "qcm",
+    "cours",
+    "JS2"
+  ],
+  "author": "LECOMTE Cyril",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "vanilla-router": "^1.2.7"
+  }
+}
