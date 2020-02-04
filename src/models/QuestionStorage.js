@@ -2,11 +2,23 @@ import app from '../../app/app.js';
 
 
 export default class QuestionStorage {
+
+
     add(question, responses) {
-        // console.log(question)
-        // console.log(responses)
-        let questions = JSON.parse(localStorage.getItem('questions')) || [];
+        let questions = this.getAll();
         questions.push({question, responses})
         localStorage.setItem('questions', JSON.stringify(questions)); 
+    }
+
+    getAll() {
+        return JSON.parse(localStorage.getItem('questions')) || [];
+    }
+
+    get(index) {
+        let data = JSON.parse(localStorage.getItem('questions')) || [];
+        if(data[index]) {
+            return data[index];
+        } 
+        return null;
     }
 }
