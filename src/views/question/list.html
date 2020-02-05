@@ -5,6 +5,8 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Question</th>
+            <th width="1%" scope="col"></th>
+            <th width="1%" scope="col"></th>
         </tr>
         </thead>
     <tbody id="liste_questions" ></tbody>
@@ -24,15 +26,46 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-          <button type="button" class="btn btn-primary">Enregistrer</button>
+          <button id="saveQuestion" type="button" class="btn btn-primary">Enregistrer</button>
         </div>
       </div>
     </div>
  </div>
 
+
+ <div class="modal fade" id="confirmDeleteQuestionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Supprimer la question</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="confirmDeleteQuestionContent" class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <button id="btnConfirmDeleteQuestion" type="button" class="btn btn-danger">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <template id="tpl_question">
     <tr>
         <th class="text-index" scope="row"></th>
         <td class="text-question"></td>
+        <td>
+            <button type="button" class="btn btn-primary btn-sm">
+              <span class="fa fa-edit"></span> 
+            </button>
+        </td>
+        <td>
+            <button type="button" class="btn btn-danger btn-sm">
+              <span class="fa fa-trash"></span> 
+            </button>
+        </td>
     </tr>
 </template>

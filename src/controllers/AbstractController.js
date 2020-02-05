@@ -5,4 +5,16 @@ export default class AbstractController {
         }
         this.app = app
     }
+
+
+    listenKeyBoard(actions) {
+        document.addEventListener('keyup', (e) => {
+            actions.forEach(action => {
+                console.log(e.keyCode)
+                if(action.keyCode == e.keyCode) {
+                    action.cb.call(this,e)
+                }
+            })
+        })
+    }
 }

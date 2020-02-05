@@ -3,10 +3,11 @@ export default class Voice {
     constructor() {
         this.started = false;
         this.current = 0;
+        this.commands = [];
         this.actions = [];
         this.nextAction = null;
         this.lastAction = null;
-        this.lastResponse;
+        this.lastResponse = null;
         this.lastIndexAlternative = 0;
         this.currentCorrection = null;
     }
@@ -29,19 +30,28 @@ export default class Voice {
             } else { 
                 this.lastResponse = event;
                 if(this.nextAction) {
-                    //console.log(this.nextAction)
-                    //console.log(event.results[this.current][0].transcript.trim())
                     this.nextAction.call(this, event.results[this.current][0].transcript.trim(), event)
                     this.lastAction = this.nextAction; // permet la modification
                     this.nextAction = null;
                 }
                 else {
-                    console.log(`commande non trouvée : ${event.results[this.current][0].transcript.trim()}`)
+                    let index = this.commands.findIndex((cmd) => { 
+                        return event.results[this.current][0].transcript.trim().includes(cmd.command) 
+                    });
+                    if (index >= 0) {
+                        let param = event.results[this.current][0].transcript.trim().replace(this.commands[index].command, '').trim()
+                        console.log(param)
+                        this.commands[index].action.call(this, param, event)
+                    }
+                    else {
+                        console.log(`commande non trouvée : ${event.results[this.current][0].transcript.trim()}`)
+                    }
                 }
             }
             this.current++
         }
     }
+
 
     valider() {
         this.lastIndexAlternative = 0;
@@ -56,7 +66,8 @@ export default class Voice {
     }
 
     corriger() {
-        if(this.lastResponse!== null) {
+
+        if(this.lastResponse !== null) {
             if(this.currentCorrection == null) {
                 this.currentCorrection = this.lastResponse.results.length-1;
             }
@@ -75,10 +86,22 @@ export default class Voice {
         }
     }
 
+    // Une commande peut contenir une valeur inconnue
+    addCommand(commands, action, nextAction = null) {
+        //@todo  permettre aux commandes d'avoir plusieurs criteres
+        if(typeof commands === 'string') {
+            this.commands.push({command: commands, action, nextAction})
+        } else {
+            commands.forEach(command => {
+                this.commands.push({command, action, nextAction})
+            });
+        }
+    }
 
+    // Une action se fait avec un (ou plusieurs) terme exact
     addAction(commands, action, nextAction = null) {
         if(typeof commands === 'string') {
-            this.actions.push({commands,action, nextAction})
+            this.actions.push({command: commands,action, nextAction})
         } else {
             commands.forEach(command => {
                 this.actions.push({command,action, nextAction})
