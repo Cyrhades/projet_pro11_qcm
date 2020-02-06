@@ -39,6 +39,7 @@ export default class Voice {
                         return event.results[this.current][0].transcript.trim().includes(cmd.command) 
                     });
                     if (index >= 0) {
+                        console.log(event.results[this.current][0].transcript.trim())
                         let param = event.results[this.current][0].transcript.trim().replace(this.commands[index].command, '').trim()
                         console.log(param)
                         this.commands[index].action.call(this, param, event)
@@ -90,10 +91,10 @@ export default class Voice {
     addCommand(commands, action, nextAction = null) {
         //@todo  permettre aux commandes d'avoir plusieurs criteres
         if(typeof commands === 'string') {
-            this.commands.push({command: commands, action, nextAction})
+            this.commands.unshift({command: commands, action, nextAction})
         } else {
             commands.forEach(command => {
-                this.commands.push({command, action, nextAction})
+                this.commands.unshift({command, action, nextAction})
             });
         }
     }
@@ -101,10 +102,10 @@ export default class Voice {
     // Une action se fait avec un (ou plusieurs) terme exact
     addAction(commands, action, nextAction = null) {
         if(typeof commands === 'string') {
-            this.actions.push({command: commands,action, nextAction})
+            this.actions.unshift({command: commands,action, nextAction})
         } else {
             commands.forEach(command => {
-                this.actions.push({command,action, nextAction})
+                this.actions.unshift({command,action, nextAction})
             });
         }
     }

@@ -2,27 +2,11 @@ export default function(app) {
 
     if(app.config.voiceEnable !== true) return;
 
-    app.voice.nextAction = this.contentQuestion;
-
-    
-    app.voice.addAction([`autre`, `corriger`, `correction`, `suivant`, `suivante`], () => {
-        app.voice.corriger()
-    })
-
-    app.voice.addAction([`précédent`,`précédente`], () => {
-        app.voice.precedent()
-    })
-
-    app.voice.addAction([`valider`], () => {
-        app.voice.valider()
-    })
-
-    app.voice.addAction(['modifier','changer','corriger', 'oups'], () => {
-        if( app.voice.lastAction ) {
-            app.voice.nextAction = app.voice.lastAction
-            app.voice.lastAction = null; 
-        }
-    })
+    // ne dois être fait que sur la page de création
+    if(app.mvc.router._currentPage.uri == 'admin/question/add') {
+        app.voice.nextAction = this.contentQuestion;
+    }
+ 
     
     app.voice.addAction([`créer une réponse`, `ajouter une réponse`], () => {
         this.addResponse()
@@ -48,8 +32,14 @@ export default function(app) {
         this.save()
     })
 
-    app.voice.addAction([`enregistrer`,`enregistrer la question`], () => {},
-    () => {
-        app.dom.getElement('#question').value = `${question.charAt(0).toUpperCase()}${question.substr(1)} ?`;
+    app.voice.addAction([`modifier la question`,`changer la question`,`modifier l'intitulé`,`changer l'intitulé`], () => {
+        app.voice.nextAction = this.contentQuestion
+    })
+    
+    app.voice.addCommand([`modifier la réponse`], (number) => {
+        if(number == 'une') number = 1;
+        else if(number == 'de') number = 2;
+
+        app.voice.nextAction = (answer) => { this.contentResponse(answer, number) }
     })
 }

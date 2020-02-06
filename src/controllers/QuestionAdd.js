@@ -4,6 +4,9 @@ import AbstractController from './AbstractController.js';
 import VoiceCommon from '../voice/VoiceCommon.js';
 import Voice from '../voice/VoiceQuestionForm.js';
 
+import Storage from '../models/QuestionStorage.js';
+
+const StorageQuestion = new Storage();
 
 export default class QuestionAdd extends AbstractController {
 
@@ -27,7 +30,6 @@ export default class QuestionAdd extends AbstractController {
             app.dom.getElement('#formQuestion').appendChild(node);
         });
     }
-
 
     addResponse(isValid = false)
     {
@@ -103,8 +105,7 @@ export default class QuestionAdd extends AbstractController {
     {
         app.dom.getElement('#question').value = `${question.charAt(0).toUpperCase()}${question.substr(1)} ?`;
     }
-
-        
+     
     /**
      * @todo ajouter des controles pour s'assurer de ne pas avoir :
      *

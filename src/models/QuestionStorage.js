@@ -1,8 +1,4 @@
-import app from '../../app/app.js';
-
-
 export default class QuestionStorage {
-
 
     add(question, responses) {
         this.saveQuestion(null, question, responses)

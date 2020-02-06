@@ -12,4 +12,8 @@ export default (app) => {
     app.voice.addAction([`créer une question`, `ajouter une question`,`créer une nouvelle question`,`ajouter une nouvelle question`], () => {
         app.mvc.router.navigateTo('/admin/question/add');
     })
+
+    app.voice.addAction([`créer un qcm`, `ajouter un qcm`,`créer un nouveau qcm`,`ajouter un nouveau qcm`], () => {
+        app.mvc.router.navigateTo('/admin/qcm/add');
+    })
 }
