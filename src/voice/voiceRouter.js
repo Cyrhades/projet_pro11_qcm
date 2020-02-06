@@ -13,7 +13,7 @@ export default (app) => {
         app.mvc.router.navigateTo('/admin/question/add');
     })
 
-    app.voice.addAction([`créer un qcm`, `ajouter un qcm`,`créer un nouveau qcm`,`ajouter un nouveau qcm`], () => {
+    app.voice.addAction([`créer un QCM`, `ajouter un QCM`,`créer un nouveau QCM`,`ajouter un nouveau QCM`], () => {
         app.mvc.router.navigateTo('/admin/qcm/add');
     })
 }

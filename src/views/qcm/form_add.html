@@ -3,12 +3,42 @@
       <label for="qcm_title">Nom du QCM</label>
       <input type="text" class="form-control" id="qcm_title" placeholder="Nom du QCM">
     </div>
-    <div id="zone_questions"></div>
+    <table class="table">
+        <tbody id="zone_questions"></tbody>
+    </table>
 </form>
 
-<template id="tpl_response">
-  <div class="form-group">
-    <label></label>
-    <input type="text" class="form-control">
+<div class="modal fade" id="choiceQuestionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Rechercher une question</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="zone_filtre_recherche" class="modal-body">
+          <p>Mot clef de recherche ?</p>
+          <input class="form-control" id="filtre_recherche" type="text" placeholder="Votre recherche ...">
+          <div id="allQuestions">
+            <table class="table">
+              <tbody id="liste_questions"></tbody>
+          </table>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <button id="saveQuestion" type="button" class="btn btn-primary">Ajouter</button>
+      </div>
+    </div>
   </div>
+</div>
+
+
+
+<template id="tpl_question">
+  <tr>
+      <th class="text-index" scope="row"></th>
+      <td class="text-question"></td>
+  </tr>
 </template>

@@ -7,7 +7,8 @@
 * Ajouter les actions à la souris
 * transformer en Progressive Web App
 * Ajouter l'envoi des questions et des QCM à une API externe, pour permettre l'utilisation sans localStorage
-
+* Ajouter un syteme de contexte pour les actions et commandes dans les voices
+* Ajouter la possibilité de push ou unshift les actions et les commandes, permettant de gérer une sorte priorité
 
 ## A la voix
 Cette application Web a été conçu pour être utiliser entiérement à la voix
