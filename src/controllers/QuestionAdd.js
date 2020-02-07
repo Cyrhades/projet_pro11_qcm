@@ -1,8 +1,11 @@
 import app from '../../app/app.js';
 import AbstractController from './AbstractController.js';
-
+// Navigation à la voix
 import VoiceCommon from '../voice/VoiceCommon.js';
 import Voice from '../voice/VoiceQuestionForm.js';
+// Navigation au clavier
+import KeyboardCommon from '../keyboard/KeyboardCommon.js';
+import Keyboard from '../keyboard/KeyboardQuestionAdd.js';
 
 import Storage from '../models/QuestionStorage.js';
 
@@ -12,12 +15,10 @@ export default class QuestionAdd extends AbstractController {
 
     show() {
         app.mvc.loadView(`question/form_add`).then(() => {
-            if(app.config.voiceEnable) {
-                // on charge la possibilité d'utilser la voix
-                //on bind l'objet courant
-                VoiceCommon.bind(this, app).call()
-                Voice.bind(this, app).call()
-            }
+            
+            // chargement des dépendances
+            this.loadDependencies(VoiceCommon,Voice,KeyboardCommon);
+            
 
             // Ajout du bouton enregistrer
             var node = document.createElement("button"); 

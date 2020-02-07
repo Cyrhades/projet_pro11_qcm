@@ -11,13 +11,14 @@ Lancer votre serveur
 > serve
 
 # TODO
+* Ajouter des catégories aux questions
+* Ajouter une interface pour créer les catégories
 * Ajouter la participation à un QCM
 * Ajouter un bouton pour activer désactiver l'écoute
-* Ajouter la navigation au clavier
 * Ajouter les actions à la souris
 * transformer en Progressive Web App
 * Ajouter l'envoi des questions et des QCM à une API externe, pour permettre l'utilisation sans localStorage
-* Ajouter un syteme de contexte pour les actions et commandes dans les voices
+* Ajouter un syteme de contexte pour les actions et commandes dans les voices et keyboard
 * Ajouter la possibilité de push ou unshift les actions et les commandes, permettant de gérer une sorte priorité
 
 ## A la voix
@@ -40,3 +41,29 @@ Vous pouvez uniquement naviguer sur la page d'accueil
 
 
 #### Créer un QCM
+
+
+## Au clavier
+Cette application Web a été conçu également pour être utiliser entiérement au clavier
+
+#### Navigation 
+La navigation fonctionne sur toute les pages !
+Utilisez les fleches de gauche et de droite pour naviguer sur les différentes pages
+* Accueil
+* Créer un QCM
+* Créer une question
+* Gérer les questions 
+
+
+#### Aller à l'accueil
+Utilisez la "tabulation" pour naviguer sur les différents QCM
+
+#### Créer une question
+
+#### Créer un QCM
+
+#### Gérer les questions 
+Utilisez les fleches "haut" et "bas" pour naviguer sur les questions
+appuyez sur "entrer" pour ouvrir la modification d'une question
+appuyez sur "supprimer" pour ouvrir la pop up de confirmation de suppression
+appuyez sur "echap" pour quitter une popup, appuyez sur "entrer" pour valider l'objectif d'une popup

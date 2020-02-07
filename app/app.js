@@ -41,11 +41,21 @@ let app = {
             return fetch(`src/views/${view}.html`).then(response => response.text()).then(response => {
                 app.dom.render(target, response)
             });
+        },
+        navigate: () => {
+            let hash = window.location.hash.trim() == '' ?  '#' :  window.location.hash.trim();
+            $(`.nav-item`).removeClass(`active`)
+            $(`a[href="${hash}"]`).parents(`.nav-item`).addClass(`active`)
+            //console.log($(`.nav-item a[href="${hash}"]`).attr('data-context'))
+            app.context = $(`.nav-item a[href="${hash}"]`).data('context')
+            app.subContext = $(`.nav-item a[href="${hash}"]`).data('sub-context')
         }
     }, 
 
     voice: null,
     storage: null,
+    context: 'global', // le context (global ou popup)
+    subContext: 'home', // le sous context évolue en fonction de la navigation
 };
 
 // L'application est exportée afin d'être accessible par d'autres modules.

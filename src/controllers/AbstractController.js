@@ -13,11 +13,12 @@ export default class AbstractController {
         })
     }
 
-    listenKeyBoard(actions) {
-        document.addEventListener('keyup', (e) => {
+    listenKeyBoard(actions, selector = document) {
+        $(selector).on('keyup', (e) => {
             actions.forEach(action => {
                 //console.log(e.keyCode)
                 if(action.keyCode == e.keyCode) {
+                    e.stopImmediatePropagation();
                     action.cb.call(this,e)
                     return;
                 }

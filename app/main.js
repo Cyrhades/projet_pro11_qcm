@@ -21,6 +21,7 @@ function initializeRouter() {
     })
 
     app.mvc.router.check().addUriListener();
+    app.mvc.navigate()
 }
 
 // --------------------------------------------------------------------------------------------------------------------
@@ -29,4 +30,8 @@ function initializeRouter() {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialisation du routeur.
     initializeRouter()
+});
+
+window.addEventListener('hashchange', (e) => {
+    app.mvc.navigate()
 });
