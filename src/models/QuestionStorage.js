@@ -15,9 +15,10 @@ export default class QuestionStorage {
         // supprimer la question (index) présente dans les QCM et retirer
         // -1 à tout les questions ayant un index supérieur à celui supprimer
         let questions = this.getAll();
-        if(index) {
+          if(index) {
             questions.splice(index,1)
         }
+
         localStorage.setItem('questions', JSON.stringify(questions)); 
     }
 

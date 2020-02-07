@@ -7,6 +7,7 @@ export default (app) => {
 
     app.voice.addAction([`voir les questions`, `afficher les questions`, `voir toutes les questions`, `afficher toutes les questions`], () => {
         app.mvc.router.navigateTo('/admin/questions');
+        app.mvc.navigate()
     })
 
     app.voice.addAction([`créer une question`, `ajouter une question`,`créer une nouvelle question`,`ajouter une nouvelle question`], () => {

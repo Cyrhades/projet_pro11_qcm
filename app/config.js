@@ -4,6 +4,7 @@
 
 const config = {
     voiceEnable : true,
+    microphoneAutoStart : true,
     keyboardShortcutEnable: true,
 };
 

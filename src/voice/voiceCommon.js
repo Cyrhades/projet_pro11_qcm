@@ -39,5 +39,5 @@ export default function(app) {
     )
 
     // On démarre l'écoute des qu'on arrive
-    app.voice.start()
+    if(app.config.microphoneAutoStart) app.voice.start()
 }

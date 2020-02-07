@@ -30,8 +30,17 @@ function initializeRouter() {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialisation du routeur.
     initializeRouter()
+
+    if(app.config.voiceEnable) {
+        app.dom.getElement("#block_microphone").style.display = "block"
+        app.dom.getElement("#microphone").addEventListener('click', () => {
+            if(app.voice.started) app.voice.stop()
+            else app.voice.start()
+        })
+    }
 });
 
 window.addEventListener('hashchange', (e) => {
     app.mvc.navigate()
 });
+

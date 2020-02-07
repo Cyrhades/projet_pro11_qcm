@@ -11,6 +11,7 @@ Lancer votre serveur
 > serve
 
 # TODO
+* Ajouter la possibilité d'avoir 2 instructions dans une commandes vocale (exemple la réponse N est valide) seul N est variable dans la commande
 * Ajouter des catégories aux questions
 * Ajouter une interface pour créer les catégories
 * Ajouter la participation à un QCM

@@ -67,22 +67,24 @@ export default class QuestionAdd extends AbstractController {
         if(isNaN(index)) {
             return;
         }
+
         var question = StorageQuestion.get(index);
 
         $('#confirmDeleteQuestionModal').modal('show')
         $('#confirmDeleteQuestionModal').on('shown.bs.modal', () => {
             $('#confirmDeleteQuestionContent').html(`Etes vous sur de vouloir supprimer la question ?<br /><br />"${question.question}"`)
-            // @todo : vérifier si keyboard actif
+            $('#confirmDeleteQuestionContent').data('index',index)
+            
             $('#confirmDeleteQuestionModal').on('keyup', (e) => {
                 if(46 == e.keyCode) {
                     $('#btnConfirmDeleteQuestion').trigger('click')
                 }
             })
         })
-        $('#btnConfirmDeleteQuestion').on('click', () => {
-            StorageQuestion.delete(index)
+        $('#btnConfirmDeleteQuestion').on('click', (e) => {
+            e.stopImmediatePropagation();
+            StorageQuestion.delete($('#confirmDeleteQuestionContent').data('index'))
             this.loadQuestionsInList()
-
             $('#confirmDeleteQuestionModal').modal('hide')
         })        
     }

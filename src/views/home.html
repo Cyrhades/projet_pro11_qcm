@@ -2,3 +2,50 @@
 <p>
     Vous pouvez créer un QCM entiérement à la voix !
 </p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nom du QCM</th>
+            <th>Nombre de questions</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="list_qcms"></tbody>
+</table>
+
+
+<div class="modal fade" id="qcmModal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="qcmModalLabel">QCM</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="qcmContent" class="modal-body">
+            <h4></h4>
+            <p class="container"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary">Précédente</button>
+          <button type="button" class="btn btn-secondary">Suivante</button>
+          <button id="btnConfirmDeleteQuestion" type="button" class="btn btn-danger">Valider le QCM</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<template id="tpl_qcm">
+    <tr>
+        <td class="text-index"></td>
+        <td class="text-title"></td>
+        <td class="text-count-questions"></td>
+        <td>
+            <button type="button" class="btn btn-primary btn-sm">
+              <span class="fa fa-question"></span> 
+            </button>
+        </td>
+    </tr>
+</template>

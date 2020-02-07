@@ -1,8 +1,11 @@
 import app from '../../app/app.js';
 import AbstractController from './AbstractController.js';
-
+// Navigation à la voix
 import VoiceCommon from '../voice/VoiceCommon.js';
 import Voice from '../voice/VoiceQcmForm.js';
+
+// Navigation au clavier
+import KeyboardCommon from '../keyboard/KeyboardCommon.js';
 
 import Storage from '../models/QcmStorage.js';
 const StorageQCM = new Storage();
@@ -15,10 +18,7 @@ export default class QcmAdd extends AbstractController {
     show() {
         app.mvc.loadView(`qcm/form_add`).then(() => {
             if(app.config.voiceEnable) {
-                // on charge la possibilité d'utilser la voix
-                // on bind l'objet courant
-                VoiceCommon.bind(this, app).call()
-                Voice.bind(this, app).call()
+                this.loadDependencies(VoiceCommon,Voice,KeyboardCommon);
             }
             // affichage des questions
             this.loadQuestionsInList();
@@ -98,7 +98,7 @@ export default class QcmAdd extends AbstractController {
             if(app.dom.getElement('.table-active')) {
                 app.dom.getElement('.table-active').className = '';
             }
-            app.dom.getElements('.text-question').forEach((element) => {
+            app.dom.getElements('#liste_questions .text-question').forEach((element) => {
                 $(element).parents('tr').toggle($(element).text().toLowerCase().indexOf(value) > -1)
             })
             $("#liste_questions").find('tr:visible:first').addClass('table-active');
@@ -119,14 +119,43 @@ export default class QcmAdd extends AbstractController {
 
     addQuestion(index)
     {
-        let question = StorageQuestion.get(index);
-        app.dom.templateToHtml("#tpl_question", "#zone_questions", (clone) => {
-            clone.querySelector("tr").dataset.index = index;
-            // permettra de classer les questions par la suite
-            clone.querySelector("tr").dataset.sort = app.dom.getElements('#zone_questions > tr').length+1;
+        if(isNaN(index)) return;
 
-            clone.querySelector(".text-question").textContent = question.question;
-            clone.querySelector(".text-index").textContent = index+1;
-        })     
+        let question = StorageQuestion.get(index);
+        if(question) {
+            app.dom.templateToHtml("#tpl_question", "#zone_questions", (clone) => {
+                clone.querySelector("tr").dataset.index = index;
+                // permettra de classer les questions par la suite
+                clone.querySelector("tr").dataset.sort = app.dom.getElements('#zone_questions > tr').length+1;
+
+                clone.querySelector(".text-question").textContent = question.question;
+                clone.querySelector(".text-index").textContent = index+1;
+            })     
+        }
     }   
+
+
+
+    /**
+     * @todo ajouter des controles pour s'assurer de ne pas avoir :
+     *
+     * - un QCM sans intitule
+     * - un QCM sans question
+     */
+    save(index = null) 
+    {
+        let title = app.dom.getElement('#qcm_title');
+        let questions = Array.from(app.dom.getElements("#zone_questions tr"))
+                            .map((question) => { return question.dataset.index });
+
+        // Enregistrer dans LocalStorage
+        if(index == null) {
+            StorageQCM.add(title.value, questions)
+        } else {
+            StorageQCM.update(index, title.value, questions)
+        }
+
+        title.value = ""
+        app.dom.getElement('#zone_questions').innerHTML = ""
+    }
 }

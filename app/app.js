@@ -44,6 +44,7 @@ let app = {
         },
         navigate: () => {
             let hash = window.location.hash.trim() == '' ?  '#' :  window.location.hash.trim();
+
             $(`.nav-item`).removeClass(`active`)
             $(`a[href="${hash}"]`).parents(`.nav-item`).addClass(`active`)
             //console.log($(`.nav-item a[href="${hash}"]`).attr('data-context'))
