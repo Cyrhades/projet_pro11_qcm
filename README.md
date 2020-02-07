@@ -3,8 +3,10 @@
 # Installation et utilisation du projet
 Récupérez le projet
 > git clone https://github.com/Cyrhades/projet_pro11_qcm
+
 Installer le projet
 > npm install
+
 Lancer votre serveur
 > serve
 

@@ -1,18 +1,22 @@
 import app from '../../app/app.js';
 import QuestionAdd from './QuestionAdd.js';
+// Navigation à la voix
 import VoiceCommon from '../voice/VoiceCommon.js';
 import Voice from '../voice/VoiceQuestionList.js';
-import Storage from '../models/QuestionStorage.js';
+// Navigation au clavier
+import KeyboardCommon from '../keyboard/KeyboardCommon.js';
+import Keyboard from '../keyboard/KeyboardQuestionList.js';
 
+// Stockage
+import Storage from '../models/QuestionStorage.js';
 const StorageQuestion = new Storage();
 
 export default class Question extends QuestionAdd {
 
     show() {
         app.mvc.loadView(`question/list`).then(() =>{
-
-            VoiceCommon.bind(this, app).call()
-            Voice.bind(this, app).call()
+            // chargement des dépendances
+            this.loadDependencies(VoiceCommon,Voice,KeyboardCommon,Keyboard);
 
             // affichage des questions
             this.loadQuestionsInList();
